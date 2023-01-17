@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshRenderer), typeof(Collider))]
 public class BaroquePiece : MonoBehaviour
 {
+    public MeshRenderer meshRenderer { get; private set; }
+    public Collider collider { get; private set; }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
+        collider = GetComponent<Collider>();
     }
 }
