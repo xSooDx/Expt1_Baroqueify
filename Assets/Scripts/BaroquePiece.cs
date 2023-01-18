@@ -2,15 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer), typeof(Collider))]
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(Collider))]
 public class BaroquePiece : MonoBehaviour
 {
-    public MeshRenderer meshRenderer { get; private set; }
-    public Collider collider { get; private set; }
+    public MeshFilter BaroqueMeshFilter { get; private set; }
+    public MeshRenderer BaroqueMeshRenderer { get; private set; }
+    public Collider BaroqueCollider { get; private set; }
+
+    Rigidbody m_rigidbody;
+
+    public bool IsPlaceHolder { get; private set; }
+    bool isPlacementBlocked = false;
+    
+    public bool CanBePlaced => IsPlaceHolder && !isPlacementBlocked;
+
+    Color meshColor;
+
     // Start is called before the first frame update
     void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        collider = GetComponent<Collider>();
+        BaroqueMeshFilter = GetComponent<MeshFilter>();
+        BaroqueMeshRenderer = GetComponent<MeshRenderer>();
+        BaroqueCollider = GetComponent<Collider>();
+
+        meshColor = BaroqueMeshRenderer.material.color;
     }
+
+    public void SetAsPlaceholder(bool isPlaceHolder = true)
+    {
+        BaroqueCollider.isTrigger = true;
+        this.IsPlaceHolder = isPlaceHolder;
+        m_rigidbody = gameObject.AddComponent<Rigidbody>();
+        m_rigidbody.isKinematic = true;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!IsPlaceHolder) return;
+
+        isPlacementBlocked = true;
+        BaroqueMeshRenderer.material.color = Color.red;
+
+        // compare other tag / layer
+        // show red
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(!IsPlaceHolder) return;
+        isPlacementBlocked = false;
+        BaroqueMeshRenderer.material.color = meshColor;
+        // return to original color
+    }
+
+
+
+
+
 }

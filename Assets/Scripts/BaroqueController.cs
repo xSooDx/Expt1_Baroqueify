@@ -7,9 +7,12 @@ public class BaroqueController : MonoBehaviour
     Camera mainCamera;
 
     [SerializeField] LayerMask baroqueTargetMask;
-    [SerializeField] GameObject baroquePiece;
+    [SerializeField] BaroquePiece[] baroquePieces;
 
-    GameObject baroquePlaceHolder;
+    BaroquePiece selectedBaroquePiece;
+    int currentBaroqueIndex = 0;
+
+    BaroquePiece baroquePlaceHolder;
 
     [Range(-180f, 180f)]
     public float rotation;
@@ -24,7 +27,8 @@ public class BaroqueController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        baroquePlaceHolder = Instantiate(baroquePiece);
+        SelectCurrentPiece();
+        
     }
 
     // Update is called once per frame
@@ -43,9 +47,7 @@ public class BaroqueController : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, baroqueTargetMask))
         {
-            
-
-            baroquePlaceHolder.SetActive(true);
+            baroquePlaceHolder.gameObject.SetActive(true);
             Transform baroquePlaceHolderTransform = baroquePlaceHolder.transform;
             baroquePlaceHolderTransform.position = hitInfo.point;
 
@@ -54,19 +56,44 @@ public class BaroqueController : MonoBehaviour
             baroquePlaceHolderTransform.rotation = Quaternion.LookRotation(hitInfo.normal);
             //baroquePlaceHolderTransform.Rotate(baroquePlaceHolderTransform.forward, rotation);
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && baroquePlaceHolder.CanBePlaced)
             {
                 Debug.DrawLine(ray.origin, hitInfo.point, Color.green, .5f);
                 Debug.DrawRay(hitInfo.point, hitInfo.normal, Color.red, .5f);
-                Instantiate(baroquePiece, baroquePlaceHolder.transform.position, baroquePlaceHolder.transform.rotation).transform.parent = hitInfo.transform;
+                Instantiate(selectedBaroquePiece, baroquePlaceHolder.transform.position, baroquePlaceHolder.transform.rotation).transform.parent = hitInfo.transform;
             }
 
 
         }
         else
         {
-            baroquePlaceHolder.SetActive(false);
+            baroquePlaceHolder.gameObject.SetActive(false);
         }
 
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            currentBaroqueIndex -= 1;
+            if (currentBaroqueIndex < 0) currentBaroqueIndex = baroquePieces.Length - 1;
+            SelectCurrentPiece();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            currentBaroqueIndex += 1;
+            if (currentBaroqueIndex >= baroquePieces.Length) currentBaroqueIndex = 0;
+            SelectCurrentPiece();
+        }
+
+    }
+
+    void SelectCurrentPiece()
+    {
+        selectedBaroquePiece = baroquePieces[currentBaroqueIndex];
+        if(baroquePlaceHolder != null)
+        {
+            Destroy(baroquePlaceHolder.gameObject);
+        }
+
+        baroquePlaceHolder = Instantiate(selectedBaroquePiece);
+        baroquePlaceHolder.SetAsPlaceholder();
     }
 }

@@ -228,7 +228,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -302,24 +301,6 @@ Transform:
   m_Father: {fileID: 2094810687}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d6c25c5ee9cb54f9da28ea2b372815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baroqueTargetMask:
-    serializedVersion: 2
-    m_Bits: 1
-  baroquePiece: {fileID: 3713386968909660212, guid: 23a502303bf4f5d4095ef63638022cd0, type: 3}
-  rotation: 0
-  rotationRate: 90
 --- !u!1 &1811209362
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,8 +391,8 @@ Transform:
   m_GameObject: {fileID: 1811209362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -426,6 +407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2094810687}
   - component: {fileID: 2094810688}
+  - component: {fileID: 2094810689}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -467,3 +449,39 @@ MonoBehaviour:
   rotationSpeed: 100
   zoomSpeed: 100
   verticalAngelLimit: 80
+--- !u!114 &2094810689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094810686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d6c25c5ee9cb54f9da28ea2b372815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baroqueTargetMask:
+    serializedVersion: 2
+    m_Bits: 1
+  baroquePieces:
+  - {fileID: 2250470464261096415, guid: 5aed0630260fbb24095662afbb3d85e7, type: 3}
+  - {fileID: 2250470464261096415, guid: 873aa7de6dd16ee43a1d94db2a33ed82, type: 3}
+  - {fileID: 2250470464261096415, guid: c3f4170b631b62044a38250f99d0cdd5, type: 3}
+  - {fileID: 2250470464261096415, guid: 9fc7940af4a49574182a813bbba99d4a, type: 3}
+  - {fileID: 2250470464261096415, guid: 3ec6bc4919a941a4995aee7a8966de31, type: 3}
+  - {fileID: 2250470464261096415, guid: 59783ac6abe30e246aecda0f90ab97d2, type: 3}
+  - {fileID: 2250470464261096415, guid: 557a146bc32642b4484beab2049b745f, type: 3}
+  - {fileID: 2250470464261096415, guid: 35be31ad5b30f5a409d3f9fc69b0868b, type: 3}
+  - {fileID: 2250470464261096415, guid: 598c27c012e748a4aae682a917036603, type: 3}
+  - {fileID: 2250470464261096415, guid: 80b8385ea208167498af681178662e47, type: 3}
+  - {fileID: 2250470464261096415, guid: 90949732fd4f63243bc993bb288c36eb, type: 3}
+  - {fileID: 2250470464261096415, guid: f7fd021084e1e0040a9154b9eadb23dc, type: 3}
+  - {fileID: 2250470464261096415, guid: b1dcb9554173f8b40a0c7d4baa6557ef, type: 3}
+  - {fileID: 2250470464261096415, guid: 71225a0370f843845a56fe41faada6d7, type: 3}
+  - {fileID: 2250470464261096415, guid: b2e50f0e2566f9347932eef3c92e90bb, type: 3}
+  - {fileID: 2250470464261096415, guid: b78076bd353eaae488e1ef34def718d6, type: 3}
+  - {fileID: 2250470464261096415, guid: ce6463cfed0a2c647849e863aabe127e, type: 3}
+  - {fileID: 2250470464261096415, guid: 573c6fd45472500408918540022e00d9, type: 3}
+  rotation: 0
+  rotationRate: 90
