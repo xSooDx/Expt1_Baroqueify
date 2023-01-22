@@ -5,16 +5,24 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(Collider))]
 public class BaroquePiece : MonoBehaviour
 {
+    public enum BType
+    {
+        Red, Green, Blue, Purple, White, Orange, Ornament
+    }
     public MeshFilter BaroqueMeshFilter { get; private set; }
     public MeshRenderer BaroqueMeshRenderer { get; private set; }
     public Collider BaroqueCollider { get; private set; }
 
     Rigidbody m_rigidbody;
 
+    [SerializeField] Color disabledColor = Color.black;
     public bool IsPlaceHolder { get; private set; }
     bool isPlacementBlocked = false;
-    
+
     public bool CanBePlaced => IsPlaceHolder && !isPlacementBlocked;
+    [SerializeField] BType type;
+
+    public BType Type { get { return type; } }
 
     Color meshColor;
 
@@ -41,7 +49,7 @@ public class BaroquePiece : MonoBehaviour
         if (!IsPlaceHolder) return;
 
         isPlacementBlocked = true;
-        BaroqueMeshRenderer.material.color = Color.red;
+        BaroqueMeshRenderer.material.color = disabledColor;
 
         // compare other tag / layer
         // show red
@@ -49,14 +57,9 @@ public class BaroquePiece : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(!IsPlaceHolder) return;
+        if (!IsPlaceHolder) return;
         isPlacementBlocked = false;
         BaroqueMeshRenderer.material.color = meshColor;
         // return to original color
     }
-
-
-
-
-
 }
