@@ -41,4 +41,12 @@ public class GameManager : MonoBehaviour
         Points = 0;
         OnPointsUpdate.Invoke(Points);
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }

@@ -7,6 +7,7 @@ public class BaroqueTower : MonoBehaviour
 {
     [SerializeField] BaroqueTowerSegment towerSegmentPrefab;
     [SerializeField] TextMeshProUGUI ScoreText;
+    [SerializeField] int basePointRequirement = 60;
 
     List<BaroqueTowerSegment> towerSegments;
     BaroqueTowerSegment topSegment;
@@ -19,6 +20,8 @@ public class BaroqueTower : MonoBehaviour
         topSegment = Instantiate(towerSegmentPrefab, transform);
         towerSegments.Add(topSegment);
         topSegment.rotationSpeed = GetRotationSpeedForLevel();
+
+        OnPointsUpdate(GameManager.instance.Points);
     }
 
     // Update is called once per frame
@@ -48,7 +51,7 @@ public class BaroqueTower : MonoBehaviour
 
     int  GetPointsRequiedForNextLevel()
     {
-        return (int)Mathf.Pow(2, towerSegments.Count - 1) * 100;
+        return (int)Mathf.Pow(2, towerSegments.Count - 1) * basePointRequirement;
     }
 
     float GetRotationSpeedForLevel()

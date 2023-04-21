@@ -51,8 +51,6 @@ public class BaroqueController : MonoBehaviour
 
             baroquePlaceHolderTransform.position = hitInfo.point;
 
-            Vector3 upDir = Quaternion.Euler(rotation, 0, 0) * hitInfo.normal;
-
             baroquePlaceHolderTransform.rotation = Quaternion.LookRotation(hitInfo.normal);
 
             BaroqueTowerPart hitPart = hitInfo.transform.GetComponent<BaroqueTowerPart>();

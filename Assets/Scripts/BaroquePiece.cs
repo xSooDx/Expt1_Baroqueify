@@ -50,6 +50,8 @@ public class BaroquePiece : MonoBehaviour
 
         isPlacementBlocked = true;
         BaroqueMeshRenderer.material.color = disabledColor;
+        //Color tempColor = new Color(meshColor.r, meshColor.g, meshColor.b, 0.4f);
+        //BaroqueMeshRenderer.material.color = tempColor;
 
         // compare other tag / layer
         // show red
